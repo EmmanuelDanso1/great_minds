@@ -1,6 +1,15 @@
-// src/pages/Home.jsx
+import { useEffect, useState } from 'react';
+
 function Home() {
-  return <h1>Welcome to Great Minds</h1>;
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    fetch('/api/hello')
+      .then(res => res.json())
+      .then(data => setMessage(data.message));
+  }, []);
+
+  return <h1>{message || 'Loading...'}</h1>;
 }
 
 export default Home;
